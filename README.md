@@ -8,8 +8,8 @@
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/geo-fence-service.git
-cd geo-fence-service
+git clone https://github.com/Asadbek-Sotvoldiyev/geo-fence-alert-service.git
+cd geo-fence-alert-service
 ```
 
 ### 2. Create virtual environment
