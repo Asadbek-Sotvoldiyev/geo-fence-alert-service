@@ -13,7 +13,4 @@ urlpatterns = [
     path('geofences/<int:pk>/', views.GeoFenceDetailView.as_view(), name='geofence-detail'),
     
     path('events/', views.GeoEventListView.as_view(), name='event-list'),
-    
-    path('health/', views.health_check, name='health-check'),
-    path('stats/', views.service_stats, name='service-stats'),
 ]

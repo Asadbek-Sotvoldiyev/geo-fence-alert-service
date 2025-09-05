@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 from config.custom_config import UNFOLD, setup_logging
+from decouple import config
 
 # ======================================= BASE SETTINGS =======================================
 
@@ -8,15 +9,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SITE_ID = 1
 
-SECRET_KEY = 'django-insecure-%cq-(md-*c872)6y31u!!k_ry6rp!+4a_ptd(l!5$rf)@n!k&+'
+SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = True
+DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = ['*']
 
-# ======================================= FEATURE FLAGS =======================================
-
-DB = False  # True bo'lsa PostgreSQL, False bo'lsa SQLite
 ENABLE_SILK = "1"
 LOGGING_STATUS = True
 UNFOLD = UNFOLD
@@ -94,6 +92,11 @@ SILKY_META = True
 
 # ======================================= URLS & WSGI =======================================
 
+
+CELERY_BROKER_URL = config('REDIS_URL')
+CELERY_RESULT_BACKEND = config('REDIS_URL')
+
+
 ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
@@ -116,26 +119,17 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # ======================================= DATABASE =======================================
 
-if DB:
-    # PostgreSQL konfiguratsiyasi
-    DATABASES = {
+DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': '',
-            'USER': '',
-            'PASSWORD': '',
-            'HOST': 'localhost' if not DEBUG else 'IP adress serverniki',
-            'PORT': '5432',
+            'NAME': config('DB_NAME'),
+            'USER': config('DB_USER'),
+            'PASSWORD': config('DB_PASSWORD'),
+            'HOST': config('DB_HOST'),
+            'PORT': config('DB_PORT'),
         }
     }
-else:
-    # SQLite konfiguratsiyasi
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+
 
 # ======================================= AUTHENTICATION =======================================
 

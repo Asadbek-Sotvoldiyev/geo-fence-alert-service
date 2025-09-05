@@ -47,9 +47,9 @@ def setup_logging():
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="FarGenius Group",
+        title="Geo-Fence",
         default_version='v1',
-        description="FarGenius Group",
+        description="Geo-Fence alert service",
         terms_of_service="https://www.google.com/policies/terms/",
         contact=openapi.Contact(email="contact@snippets.local"),
         license=openapi.License(name="BSD License"),
